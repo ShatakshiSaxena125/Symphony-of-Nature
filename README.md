@@ -1,49 +1,101 @@
-# Symphony of Nature
+# 0x07 : 2D Primitives #
 
-## Description
-Symphony of Nature is a computer graphics project that aims to depict the beauty and rhythm of everyday nature scenes. Through a series of carefully crafted scenes, the project showcases the dynamic interactions between elements of nature such as the sun, flowers, birds, and human presence.
+![](./assets/teaser.png)
 
-## Scenes Overview
+## Assignment ##
 
-### Scene 1
-- **Visuals**: A red sun emerges from the left, accompanied by closed sunflowers and birds positioned on the extreme right.
-- **Background**: Nature scenery featuring a serene river and abundant greenery.
+1. **Choose a shape** to draw, and save its reference
+   image as
+   `./assets/<roll-no>-0x07-2d-primitives-refimg.png`.
+   Remember to replace `<roll-no>`.  It should reflect
+   in the `index.html` upon clicking "Show image."
+   Also upload it to the form along with your
+   submission.  Here's a reference on [how to choose a
+   shape](./suggestions.md#how-to-choose-a-shape), for
+   anyone interested.
+2. **Draw the shape**.  Use [canvas draw
+   functions](./quick-reference.md#geometry-definition)
+   to create the shape so as to redefine and complete
+   the function
+   [`Experiment.createGeometry`](./experiment.js#L56).
+3. **Transform**.  Refactor the function
+   [`Experiment.getBaseTransform`](./experiment.js#L86)
+   to generate a suitable initial state for the shape.
+   Also see [the suggestions for its
+   implementation](./suggestions.md#how-to-implement-transforms),
+   [useful
+   API](./quick-reference.md#dommatrix-interface) and
+   [its math](./transformation-math.md).
+4. **Stylise**.  Refactor the function
+   [`Experiment.getBaseStyles`](./experiment.js#L104)
+   to generate a soothing style. Here's a quick
+   reference on [rendering and stylisation using HTML
+   Canvas](./quick-reference.md#rendering-canvas-in-2d).
+5. **UI**. Refactor the function
+   [`Experiment.handleTransforms`](./experiment.js#L45)
+   to handle the inputs from UI.
+6. **Collage**.  Snapshot a few of your canvases using
+   Download button; and compile a collage using the
+   same.  Rename the collage as follows and upload it
+   to the form along with your submission.  
+   `<roll-no>-0x07-2d-primitives-collage.png`
 
-### Scene 2
-- **Visuals**: Birds make subtle movements, while the sun begins to move behind a tree. Sunflowers gradually bloom and lean towards the sun's direction. A boat gracefully enters the scene from the right.
-- **Continuity**: The motion of elements signifies the passage of time and the natural progression of the day.
+## Submit ##
 
-### Scene 3
-- **Visuals**: The sun progresses further along its path. Sunflowers reach full bloom and continue tilting towards the sun. The boat maintains its course.
-- **Progression**: Incremental changes in the sun's position and sunflower behavior deepen the immersion into the natural flow of events.
+1. Git URL
+2. Commit ID
+3. Reference Image (of the shape chosen in Step 1)
+4. Teaser (from Collage in Step 6)
 
-### Scene 4
-- **Visuals**: The sun reaches its zenith, marking noon. Sunflowers are fully bloomed and exhibit a joyful appearance. The boat remains in motion, underscoring the continuity of activity.
-- **Ambiance**: The scene conveys the vibrancy and vitality of midday, portraying a moment of heightened energy in the natural environment.
 
-### Scene 5
-- **Visuals**: The sun initiates its descent towards the right. Sunflowers persist in their orientation towards the sun, maintaining a visual link to preceding scenes.
-- **Transition**: The subtle shift in the sun's position foreshadows the approaching transition from day to evening.
+## Candidate's Remarks ##
 
-### Scene 6
-- **Visuals**: People enter the scene for a leisurely walk. Sunflowers react by closing as humans approach. The sun retreats behind a tree, accompanied by the entry of birds from the left.
-- **Interaction**: Human presence triggers dynamic responses from the natural elements, enhancing the immersive experience.
+*[Statements within braces [] are comments,
+placeholders and directive. Please remove them and /or
+replace them with your response.]*
 
-### Scene 7
-- **Visuals**: People settle near the riverbank. Sunflowers remain closed in response to human proximity. The boat re-enters the scene from the left, maintaining the continuity of its journey. Birds continue their activities, contributing to the ambient atmosphere.
-- **Atmosphere**: The scene evokes a sense of tranquility and harmonious coexistence between humans and nature.
+*[Q: Apart from the given objective, what did you try
+to/ were able to achieve through this assignment.]*
 
-### Scene 8
-- **Visuals**: The transition to sunset unfolds, casting warm hues across the landscape. The boat gracefully proceeds towards the right, accompanied by the gradual shift in lighting.
-- **Mood**: The visual transformation reflects the peaceful transition from day to evening, setting the stage for the upcoming nighttime sequences.
+*[Q: How difficult/ easy did you find doing this?
+Reference it with the fact that you are supposed to
+spend 3-4 hours on this problem.  1 hr in the Lab and
+rest later.]*
 
-### Scene 9
-- **Visuals**: Night descends, characterized by a subdued greyish sky. People gradually depart from the area, marking the conclusion of daytime activities.
-- **Transition**: The shift to nighttime scenery signifies the completion of the day's cycle and prepares the viewer for the nocturnal scenes ahead.
+*[Q: Do you think this exercise may help you solve a
+real world problem that you may encounter? Please quote
+an example if so.]*
 
-### Scene 10
-- **Visuals**: Stars and the moon emerge in the night sky, offering a serene backdrop to the tranquil scene. The moon takes center stage, accompanied by the observation of tidal movements.
-- **Culmination**: The project concludes with a contemplative view of the nocturnal sky, symbolizing the cyclical nature of time and the enduring beauty of the natural world.
+## Acknowledgements ##
 
-## Conclusion
-Symphony of Nature encapsulates the essence of everyday natural phenomena, inviting viewers to immerse themselves in the gentle rhythms and harmonious interactions of the environment. Through meticulous attention to detail and fluid transitions between scenes, the project aims to evoke a sense of wonder and appreciation for the wonders of the natural world.
+*[Are there any external resources, friends,
+colleagues, mentors who have helped you do it. Please
+acnowledge them.]*
+
+
+## Objective ##
+
++ Use
+  [`Path2D`](https://developer.mozilla.org/en-US/docs/Web/API/Path2D)
+  to define primitives.
++ Define geometric transforms and apply using
+  [`addPath`
+  interface](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/addPath),
+  including
+  + Rigid-body tranforms
+  + Reflection
+  + Shear
++ Rendering the canvas, *e.g.*
+  + [Stroke
+    outline](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke)
+    with [Line
+    type](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash),
+    [Line
+    width](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth),
+    and
+    [Color/Gradient/Pattern](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle)
+  + [Fill
+    Region](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill)
+    with
+    [Color/Gradient/Pattern](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)
+
