@@ -349,10 +349,10 @@ function main() {
 
 
   ]).then(() => {
-    setTimeout(()=>{
+    
       animate();
 
-    },10000)
+    
     // Once both images are loaded, start the animation
     
   });
