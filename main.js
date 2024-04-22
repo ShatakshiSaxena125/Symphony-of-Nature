@@ -3,6 +3,7 @@
 let visible = 'Canvas'	// or 'refimg'
 let invisible = 'Refimg'
 const canvasSel = '#myCanvas'
+const { canvas, ctx, bb } = getCanvas(canvasSel)
 const refimgSel = '#refImg'
 const sels = {
   Canvas: canvasSel,
@@ -16,7 +17,6 @@ const saveFunctions = {
   Canvas: saveCanvas,
   Refimg: saveRefimg,
 }
-
 
 
 function main() {
@@ -34,7 +34,7 @@ function main() {
   setupRefimg(Experiment)
 
   // Set up canvas
-  flipVisible('Canvas')
+  //flipVisible('Canvas')
 
   // --------------------------------------------------
   // Canvas Setup
@@ -48,13 +48,6 @@ function main() {
   // --------------------------------------------------
   var c = 0.8;
 
-
-  //sound effect
-  // this.paddleSound = new Audio("deep.mp3");
-
-  // let audioFile = new Audio('deep.mp3');
-  // audioFile.play()
-
   // Create an Image object for the water
   const waterImg = new Image();
   waterImg.src = 'water.png';
@@ -64,11 +57,12 @@ function main() {
   skyImg.src = 'sky.png';
   const landImg = new Image();
   landImg.src = 'beach-2.png';
-  const birdImg=new Image();
-  birdImg.src='fly-0.png'
-  const walk_Img=new Image();
-  walk_Img.src='walk_0.png'
-  
+  const birdImg = new Image();
+  birdImg.src = 'fly-0.png'
+  const walk_Img = new Image();
+  walk_Img.src = 'walk_0.png'
+
+
   // const gif = new GIF({
   //   workers: 2,
   //   quality: 10
@@ -83,6 +77,11 @@ function main() {
   // Create an Image object for the boat
   const boatImg = new Image();
   boatImg.src = 'boat-1.png';
+  const moonImg = new Image();
+  moonImg.src = 'moon-2.png';
+  const flowerImg = new Image();
+  flowerImg.src = 'flower-2.png'
+
 
 
 
@@ -103,18 +102,22 @@ function main() {
   var sunvisible = true;
   var moonvisible = false;
   var a = 0.05;
-  i=1;
-  j=1;
+  i = 1;
+  j = 1;
 
-  const frameUrls = ['fly-0.png','fly-1.png','fly-2.png','fly-3.png','fly-4.png',
-  'fly-5.png','fly-6.png','fly-7.png', ]; // Add URLs for your frames
-  birdX=30;
-  birdY=120;
+  const frameUrls = ['fly-0.png', 'fly-1.png', 'fly-2.png', 'fly-3.png', 'fly-4.png',
+    'fly-5.png', 'fly-6.png', 'fly-7.png',]; // Add URLs for your frames
+  birdX = 30;
+  birdY = 120;
 
-  const frame2Urls = ['walk_0.png','walk_1.png','walk_2.png','walk_3.png','walk_4.png',
-  'walk_5.png','walk_6.png','walk_7.png' ]; // Add URLs for your frames
-  walk_X=-80;
-  walk_Y=300;
+  const frame2Urls = ['walk_0.png', 'walk_1.png', 'walk_2.png', 'walk_3.png', 'walk_4.png',
+    'walk_5.png', 'walk_6.png', 'walk_7.png']; // Add URLs for your frames
+  walk_X = -80;
+  walk_Y = 300;
+  moonX = canvas.width + 20;
+  moonY = 150;
+  skyX = 0;
+  skyY = -10
 
 
 
@@ -125,33 +128,40 @@ function main() {
   // Function to draw the scene
   function draw() {
 
-    ctx.save();
+    ctx.save()
 
     // Clear the canvas
 
-    ctx.drawImage(skyImg, -10, 0, skyImg.width, skyImg.height / 1.5);
-  
-    
+    ctx.drawImage(skyImg, skyX, skyY, skyImg.width, skyImg.height / 1.5);
+
+
+
     ctx.drawImage(landImg, 0, -135);
-    
-  
-      ctx.drawImage(birdImg, birdX, birdY, birdImg.width/2, birdImg.height/2);
-      
-     
-       // Draw the current frame at position (0, 0)
-    
+    ctx.drawImage(flowerImg, 390, 320, flowerImg.width / 24, flowerImg.height / 24);
+
+
+    ctx.drawImage(birdImg, birdX, birdY, birdImg.width / 2, birdImg.height / 2);
+
+
+    // Draw the current frame at position (0, 0)
+
     ctx.drawImage(waterImg, waterX, waterY);
-    
+
     if (sunvisible === true) {
-      
+
       ctx.drawImage(sunImg, sunX, sunY, sunImg.width / 30, sunImg.height / 30);
-    
+
     }
 
     if (moonvisible === true) {
-      
-      ctx.drawImage(walk_Img, walk_X, walk_Y, walk_Img.width/2, walk_Img.height/2);
-  
+
+
+      ctx.drawImage(walk_Img, walk_X, walk_Y, walk_Img.width / 2, walk_Img.height / 2);
+      ctx.save()
+      ctx.drawImage(moonImg, moonX, moonY, moonImg.width / 10, moonImg.height / 10)
+      ctx.restore()
+
+
       if (a < 0.8) {
         darkenImages(a)
         a += 0.001
@@ -171,7 +181,7 @@ function main() {
     // Draw the boat on top of the water if it's visible
     if (boatVisible) {
 
-     ctx.save()
+      ctx.save()
       // Scale the boat image horizontally if it's moving from right to left
       if (boatDirection === 'left') {
 
@@ -197,24 +207,37 @@ function main() {
 
     // Update the positions
     if (boatDirection === 'left' && boatVisible === true) {
-      boatX -= 3.5; // Move the boat 2 pixels to the left on each animation frame
+      boatX -= 5; // Move the boat 2 pixels to the left on each animation frame
       // Move the water 2 pixels to the right to simulate the boat's movement
     } else if (boatDirection === 'right' && boatVisible === true) {
-      boatX += 3.5; // Move the boat 2 pixels to the right on each animation frame
+      boatX += 5; // Move the boat 2 pixels to the right on each animation frame
       // Move the water 2 pixels to the left to simulate the boat's movement
     }
     waterX -= 1.5;
-    sunX += 2;
-    birdX+=3
-    birdY-=2
-    if(moonvisible==true)
-    {
-    walk_X+=3
-    setTimeout(()=> {
-      walk_Img.src=frame2Urls[j]
-      j=(j+1)%8;
-    },1000)
+    skyX -= 1;
+    sunX += 3;
+    birdX += 3
+    birdY -= 2
+
+    if (moonvisible === true) {
+      moonX -= 2.5;
+      if (moonY <= 0) {
+        moonY = 0;
+      }
+
+      if (moonX <= 120) {
+        moonY += 1.5;
+
+      }
+      else {
+        moonY -= 1.5
+      }
+
     }
+
+
+
+
 
 
 
@@ -223,11 +246,11 @@ function main() {
     }
 
     if (sunX >= 600) {
-      sunY += 1;
+      sunY += 1.5;
 
     }
     else {
-      sunY -= 1
+      sunY -= 1.5
     }
 
 
@@ -251,31 +274,41 @@ function main() {
 
         boatVisible = true;
 
-      }, 8000); // Set timeout for 10 seconds
+      }, 7000); // Set timeout for 10 seconds
     }
 
-    setTimeout(()=> {
-      birdImg.src=frameUrls[i]
-      i=(i+1)%8;
-    },500)
+
+    birdImg.src = frameUrls[i]
+    i = (i + 1) % 8;
 
 
-    
-    
+    if (moonvisible === true) {
+      walk_X += 3;
+
+      walk_Img.src = frame2Urls[j]
+      j = (j + 1) % 8;
+    }
+
+
+
     // If the water moves off the canvas, reset its position
     if (waterX < -waterImg.width / 4) {
       waterX = 0; // Reset the water's x-coordinate to the right side of the canvas
     }
+    if (skyX < -skyImg.width / 4) {
+      skyX = 0; // Reset the water's x-coordinate to the right side of the canvas
+    }
+
 
     // Draw the scene
     draw();
 
     // Request the next animation frame
-    setTimeout(()=>{
+    setTimeout(() => {
       requestAnimationFrame(animate);
-    },60)
-      
-    
+    }, 60)
+
+
   }
 
 
@@ -285,7 +318,7 @@ function main() {
     // Get the canvas width and height
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
-
+    ctx.save()
     // Apply a dark overlay using globalCompositeOperation
     ctx.globalCompositeOperation = 'multiply'; // Blend mode to darken the canvas
     ctx.fillStyle = `rgba(0, 0, 0, ${a})`; // Adjust transparency level as needed
@@ -293,6 +326,7 @@ function main() {
 
     // Reset globalCompositeOperation to default
     ctx.globalCompositeOperation = 'source-over';
+    ctx.restore()
   }
   // Start the animation when both images are loaded
   Promise.all([
@@ -307,41 +341,123 @@ function main() {
       sunImg.onload = resolve;
     }),
 
+    new Promise((resolve, reject) => {
+      flowerImg.onload = resolve;
+    })
+
 
 
 
   ]).then(() => {
+    setTimeout(()=>{
+      animate();
+
+    },10000)
     // Once both images are loaded, start the animation
-    animate();
+    
   });
 
 
 }
 
-function updateCandidateDetails({ rollNo, name }) {
-  let isValidRollNo, isValidName
+function updateCandidateDetails({ rollNos, names }) {
+  let isValidRollNo, isValidName, act, byHtml, n
   isValidRollNo = (isValidName = false)
 
   // Validate RollNo
-  rollNo = Number(rollNo)
-  isValidRollNo = !isNaN(rollNo) && 9999999 < rollNo
-  if (!isValidRollNo) {
-    console.warn({ invalidRollNo: rollNo })
-  }
+
+  rollNos = rollNos.split(',')
+    .map(
+      s => Number(s.trim())
+    )
+    .filter(
+      n => {
+        isValidRollNo = !isNaN(n) && 9999999 < n
+        if (!isValidRollNo) {
+          console.warn({
+            invalidRollNo: n,
+            message: "Roll No should be Integer."
+          })
+        }
+        return isValidRollNo
+      }
+    )
 
   // Validate Name
   const titleCasePat = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/
-  name = String(name).trim()
-  isValidName = titleCasePat.test(name)
+  names = String(names).trim()
+
+  act = names.split('(').shift().trim()
+  isValidName = titleCasePat.test(act)
   if (!isValidName) {
-    console.warn({ invalidName: name })
+    console.warn({
+      invalidAct: act,
+      message: "Act should be in Title Case."
+    })
+    act = ''
   }
 
-  if (isValidRollNo && isValidName) {
-    document.querySelector('#by')
-      .textContent = `By: ${name} (${rollNo})`
+  names = names.split('(').pop().split(')').shift()
+    .split(',').map(s => s.trim())
+    .filter(name => {
+      isValidName = titleCasePat.test(name)
+      if (!isValidName) {
+        console.warn({
+          invalidName: name,
+          message: "Name should be a Title Case."
+        })
+      }
+      return isValidName
+    })
+    byHtml = ''
+
+  n = Math.min(names.length, rollNos.length)
+  for (const i of Array(n).keys()) {
+    if (0 < i)
+      byHtml = `${byHtml}<span class="p-2">|</span>`
+
+    byHtml = `${byHtml}<code>${rollNos[i]}</code> : ${names[i]}`
   }
+
+  if (0 < act.length) {
+    byHtml = `<strong>${act}</strong><br class="hidden md:inline"/><span class="p-4 md:hidden">&mdash;</span>${byHtml}`
+  }
+
+  if (0 < byHtml.length) {
+    byHtml = `Created by ${byHtml}`
+  } else {
+    byHtml
+      = 'Error parsing candidate details. Check console.'
+  }
+
+  document.querySelector('#by')
+    .innerHTML = byHtml
 }
+
+// function updateCandidateDetails({ rollNo, name }) {
+//   let isValidRollNo, isValidName
+//   isValidRollNo = (isValidName = false)
+
+//   // Validate RollNo
+//   rollNo = Number(rollNo)
+//   isValidRollNo = !isNaN(rollNo) && 9999999 < rollNo
+//   if (!isValidRollNo) {
+//     console.warn({ invalidRollNo: rollNo })
+//   }
+
+//   // Validate Name
+//   const titleCasePat = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/
+//   name = String(name).trim()
+//   isValidName = titleCasePat.test(name)
+//   if (!isValidName) {
+//     console.warn({ invalidName: name })
+//   }
+
+//   if (isValidRollNo && isValidName) {
+//     document.querySelector('#by')
+//       .textContent = `By: ${name} (${rollNo})`
+//   }
+// }
 
 function saveCanvas() {
   const link = document.createElement('a');
@@ -379,4 +495,11 @@ function flipVisible(name) {
 function setupRefimg({ rollNo }) {
   document.querySelector(refimgSel)
     .src = `./assets/${rollNo}-${slug(document.title)}-refimg.png`
+}
+function slug(s) {
+  return s
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter(s => 0 < s.length)
+    .join('-')
 }

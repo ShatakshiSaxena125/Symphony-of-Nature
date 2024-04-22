@@ -1,15 +1,15 @@
 // let getDom = (...args) => (document.querySelector(...args))
 const getDom = document.querySelector.bind(document)
 
-function canvasSetup(sel) {
-  const {canvas, bb:{width: W, height: H}} = getCanvas(sel)
-  canvas.width = 10
-  canvas.height = 1
+function canvasReset(sel) {
+  const canvas = getDom(sel)
 
-  setTimeout(() => {
-    canvas.width = parseFloat(W)
-    canvas.height = parseFloat(H)
-  }, 0)
+  // Get Dom Sizes
+  const {bb:{width: W, height: H}} = getCanvas(sel)
+
+  // Reset Canvas Sizes
+  canvas.width = parseFloat(W)
+  canvas.height = parseFloat(H)
 }
 
 function getCanvas(sel, context='2d') {
