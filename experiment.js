@@ -11,22 +11,22 @@ class Experiment {
   constructor() {
     const Cls = this.constructor
 
-    this.transformControls
-      = new Controls('#transform-controls', {
-        submitSel: '#transform-submit'
-      })
+    // this.transformControls
+    //   = new Controls('#transform-controls', {
+    //     submitSel: '#transform-submit'
+    //   })
 
-    const handleTransforms = this.handleTransforms.bind(this)
-    this.transformControls.el.addEventListener(
-      'update', handleTransforms
-    )
-    this.transformControls.el.addEventListener(
-      'submit', handleTransforms
-    )
+    // const handleTransforms = this.handleTransforms.bind(this)
+    // this.transformControls.el.addEventListener(
+    //   'update', handleTransforms
+    // )
+    // this.transformControls.el.addEventListener(
+    //   'submit', handleTransforms
+    // )
 
     // Uncomment to enable tranform controls
     // --------------------------------------------------
-    this.transformControls.unhide()
+    // this.transformControls.unhide()
 
 
     // ------------------------------------------------
