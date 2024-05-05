@@ -442,8 +442,18 @@ if(k==179)
       walk_Img.onload = resolve;
     }),
     new Promise((resolve, reject) => {
-      flowerImg.onload = resolve;
+      moonImg.onload = resolve;
     }),
+     new Promise((resolve, reject) => {
+      skyImg.onload = resolve;
+    }),
+     new Promise((resolve, reject) => {
+      birdImg.onload = resolve;
+    }),
+    
+    
+    
+    
 
     
 
