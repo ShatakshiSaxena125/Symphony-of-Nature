@@ -399,7 +399,7 @@ if(k==179)
     // Request the next animation frame
     setTimeout(() => {
       requestAnimationFrame(animate);
-    }, 40)
+    }, 60)
 
 
   }
