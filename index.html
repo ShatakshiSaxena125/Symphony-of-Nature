@@ -24,7 +24,7 @@
                      <div class="flex-1 relative">
                             <img class="hidden" id="refImg" />
 
-                            <canvas id="myCanvas" width="500" height="25" class=" bg-slate-100 w-full h-full">
+                            <canvas id="myCanvas" width="400" height="25" class=" bg-slate-100 w-full h-full">
 
                             </canvas>
                             <!-- <div class="absolute top-0 right-0 text-center">
@@ -51,7 +51,7 @@
                             </div>
                      </div>
 
-                     <div id="transform-controls" class="flex-none flex flex-col gap-2
+                     <!-- <div id="transform-controls" class="flex-none flex flex-col gap-2
                     lg:max-w-sm hidden mb-2">
                             <header class="flex-none flex flex-row
                          justify-between items-baseline">
@@ -114,7 +114,7 @@
                                           <span>=&nbsp;0</span>
                                    </div>
                             </div>
-                     </div>
+                     </div> -->
 
                      <div id="fill-controls" class="flex flex-col gap-2 hidden">
 
@@ -225,12 +225,27 @@
               <img id="pattern" src="./assets/patterns/pattern-default.png" />
        </div>
        <script>
-              window.addEventListener("DOMContentLoaded", event => {
-                     const audio = document.querySelector("audio");
-                     audio.volume = 0.4;
-                     audio.play();
-              });
-       </script>
+              window.addEventListener("click", event => {
+    const audio = document.querySelector("audio");
+    const canvas = document.getElementById("myCanvas");
+
+    // Check if the click event target is the canvas or a child element of the canvas
+    if (event.target === canvas || canvas.contains(event.target)) {
+        audio.volume = 0.4;
+
+        // Check if audio is paused
+        if (audio.paused) {
+            // Audio is paused, start playing
+            audio.play();
+        } else {
+            // Audio is playing, pause or stop
+            audio.pause();
+            // Optionally reset the audio to the beginning when stopping
+            audio.currentTime = 0;
+        }
+    }
+});
+               </script>
 
        <script type="text/javascript" src="./experiment.js"></script>
        <script type="text/javascript" src="./utils.js"></script>
