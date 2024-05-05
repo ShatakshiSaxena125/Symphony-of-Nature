@@ -49,5 +49,9 @@ Symphony of Nature is a computer graphics project that aims to depict the beauty
 Symphony of Nature encapsulates the essence of everyday natural phenomena, inviting viewers to immerse themselves in the gentle rhythms and harmonious interactions of the environment. Through meticulous attention to detail and fluid transitions between scenes, the project aims to evoke a sense of wonder and appreciation for the wonders of the natural world.
 
 
-https://github.com/ShatakshiSaxena125/Symphony-of-Nature/assets/126514778/67c1faaa-d379-4489-9b2c-3a79925793e8
+
+
+
+
+https://github.com/Cheshta08/Symphony-of-Nature/assets/111150320/388ec471-5570-47e6-9948-04e6c3d327ca
 
